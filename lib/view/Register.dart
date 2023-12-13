@@ -24,9 +24,9 @@ class _RegisterState extends State<Register> {
       String formattedDate = DateFormat("yyyy-MM-dd").format(now);
 
       User newUser = User(
-        usuTxNome: _nameController.text.toUpperCase(),
-        usuTxLogin:  _usernameController.text.toUpperCase(),
-        usuTxSenha:   _passwordController.text.toUpperCase(),
+        usuTxNome: _nameController.text,
+        usuTxLogin:  _usernameController.text,
+        usuTxSenha:   _passwordController.text,
         usuDtCadastro: user?.usuDtCadastro = DateFormat("yyyy-MM-dd").parse(formattedDate));
       print("Novo usuário: $newUser");
         await Services().createUser(newUser);
