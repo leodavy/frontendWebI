@@ -1,0 +1,1 @@
+ /home/ldvy/Documents/frontendWebI/.dart_tool/flutter_build/6ad8f30bc0e473c4b2a7c89d0b694389/native_assets.yaml: 

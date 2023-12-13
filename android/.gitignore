@@ -1,5 +1,8 @@
 gradle-wrapper.jar
 /.gradle
+/.dart_tool
+/.idea
+/build
 /captures/
 /gradlew
 /gradlew.bat

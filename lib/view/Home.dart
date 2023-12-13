@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_web1/view/TournamentRegister.dart';
-import 'package:frontend_web1/view/TournamentList.dart';
+import 'package:frontend_web1/view/FindUser.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context)=> TournamentSearch()));
+                                        builder: (context)=> FindUser()));
                               },
                               icon: Icon(Icons.search, size: 90),
                             ),

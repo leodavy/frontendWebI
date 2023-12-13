@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_web1/model/User.dart';
+import 'package:frontend_web1/service/Services.dart';
+import 'package:intl/intl.dart';
 
 class Register extends StatefulWidget {
-  const Register({super.key});
+   Register({super.key});
+
 
   @override
   State<Register> createState() => _RegisterState();
@@ -12,20 +15,26 @@ class _RegisterState extends State<Register> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  User? user;
 
   void register() async {
-    String name = _nameController.text;
-    String password = _passwordController.text;
-    String username = _usernameController.text;
-    DateTime dateTime = DateTime.now();
+    FocusManager.instance.primaryFocus?.unfocus();
+    try{
+      DateTime now = DateTime.now();
+      String formattedDate = DateFormat("yyyy-MM-dd").format(now);
 
-    User newUser = User(
-      usuTxNome: name,
-      usuTxLogin: username,
-      usuTxSenha: password,
-      usuDtCadastro: dateTime
-    );
+      User newUser = User(
+        usuTxNome: _nameController.text.toUpperCase(),
+        usuTxLogin:  _usernameController.text.toUpperCase(),
+        usuTxSenha:   _passwordController.text.toUpperCase(),
+        usuDtCadastro: user?.usuDtCadastro = DateFormat("yyyy-MM-dd").parse(formattedDate));
+      print("Novo usuário: $newUser");
+        await Services().createUser(newUser);
 
+
+    } catch (error) {
+      print("User register error: $error");
+    }
   }
 
   @override
@@ -102,6 +111,7 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 10),
                 ElevatedButton(onPressed:() {
+                  register();
                 }, child: Text("Cadastrar",style: TextStyle(color: Colors.black),))
               ],),
             ),

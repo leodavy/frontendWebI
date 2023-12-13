@@ -74,6 +74,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl",
+      "rootUri": "file:///home/ldvy/.pub-cache/hosted/pub.dev/intl-0.19.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "lints",
       "rootUri": "file:///home/ldvy/.pub-cache/hosted/pub.dev/lints-2.1.1",
       "packageUri": "lib/",
@@ -170,7 +176,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2023-12-12T05:39:36.843283Z",
+  "generated": "2023-12-13T05:58:25.289868Z",
   "generator": "pub",
-  "generatorVersion": "3.2.1"
+  "generatorVersion": "3.2.3"
 }
