@@ -3,6 +3,7 @@ gradle-wrapper.jar
 /.dart_tool
 /.idea
 /build
+pubspec.lock
 /captures/
 /gradlew
 /gradlew.bat
