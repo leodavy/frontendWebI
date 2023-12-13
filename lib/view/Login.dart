@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_web1/view/Home.dart';
 import 'package:frontend_web1/view/Register.dart';
 
 class Login extends StatefulWidget {
@@ -64,6 +65,10 @@ class _LoginState extends State<Login> {
             ),
             SizedBox(height: 10),
             ElevatedButton(onPressed:() {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context)=> Home()));
             }, child: Text("Entrar",
               style: TextStyle(
                   color: Colors.black),)),
@@ -73,7 +78,7 @@ class _LoginState extends State<Login> {
                   MaterialPageRoute(
                       builder: (context)=> Register()));
             },
-                child: Text("Registrar-se",
+                child: Text("Cadastrar-se",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold)))

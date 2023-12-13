@@ -34,7 +34,7 @@ class _RegisterState extends State<Register> {
       backgroundColor: Colors.white60,
       appBar: AppBar(
         foregroundColor: Colors.white,
-        title: const Text("Registro",style: TextStyle(color: Colors.white)),
+        title: const Text("Cadastro",style: TextStyle(color: Colors.white)),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
@@ -56,7 +56,7 @@ class _RegisterState extends State<Register> {
                   width: 300,
                   child: TextFormField(
                     controller: _nameController,
-                    decoration: InputDecoration(labelText: " Nome:",
+                    decoration: InputDecoration(hintText: " Nome:",
                     labelStyle: TextStyle(color: Colors.black),
                     filled: true,
                     fillColor: Colors.white,
@@ -72,7 +72,7 @@ class _RegisterState extends State<Register> {
                   width: 300,
                   child: TextFormField(
                     controller: _usernameController,
-                    decoration: InputDecoration(labelText: " Login:",
+                    decoration: InputDecoration(hintText: " Login:",
                         labelStyle: TextStyle(color: Colors.black),
                         filled: true,
                         fillColor: Colors.white,
@@ -89,7 +89,7 @@ class _RegisterState extends State<Register> {
                   child: TextFormField(
                     obscureText: true,
                     controller: _passwordController,
-                    decoration: InputDecoration(labelText: " Senha:",
+                    decoration: InputDecoration(hintText: " Senha:",
                         labelStyle: TextStyle(color: Colors.black),
                         filled: true,
                         fillColor: Colors.white,

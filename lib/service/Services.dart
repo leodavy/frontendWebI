@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:frontend_web1/model/User.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -12,14 +13,20 @@ class Services{
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(newUser.toJson()));
       if (response.statusCode == 201) {
-        print("User successfully registered!");
+        if (kDebugMode) {
+          print("User successfully registered!");
+        }
         return newUser;
       } else {
-        print("Error: ${response.statusCode}");
+        if (kDebugMode) {
+          print("Error: ${response.statusCode}");
+        }
       throw Exception("Failed to register user");
       }
     } catch (error){
-      print("Error: $error");
+      if (kDebugMode) {
+        print("Error: $error");
+      }
       throw Exception("Failed to register user");
     }
   }
