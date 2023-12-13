@@ -5,7 +5,7 @@ gradle-wrapper.jar
 /build
 pubspec.lock
 /captures/
-/gradlew
+/android/gradlew
 /gradlew.bat
 /local.properties
 GeneratedPluginRegistrant.java
