@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:frontend_web1/model/Tournament.dart';
 import 'package:frontend_web1/model/User.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -51,6 +52,24 @@ class Services{
         print("Authentication error: $error");
       }
       return false;
+    }
+  }
+  Future<Tournament> createTournament(Tournament newTournament) async {
+    try {
+      final response = await http.post(
+          Uri.parse('$userBaseUrl/torneios/cadastrar'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode(newTournament.toJson()));
+      if (response.statusCode == 200) {
+        if (kDebugMode) {
+          print("Tournament successfully registered!");
+        }
+        return newTournament;
+      } else {
+        throw Exception("Failed to register tournament");
+      }
+    } catch (error) {
+      throw Exception("Failed to register tournament");
     }
   }
 }

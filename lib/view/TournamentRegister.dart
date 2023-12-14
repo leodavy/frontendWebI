@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_web1/model/Tournament.dart';
 import 'package:frontend_web1/model/User.dart';
+import 'package:frontend_web1/service/Services.dart';
 
 class TournamentRegister extends StatefulWidget {
   const TournamentRegister({super.key});
@@ -10,22 +12,18 @@ class TournamentRegister extends StatefulWidget {
 
 class _TournamentRegisterState extends State<TournamentRegister> {
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
-  void register() async {
-    String name = _nameController.text;
-    String password = _passwordController.text;
-    String username = _usernameController.text;
-    DateTime dateTime = DateTime.now();
+   register() async {
+    try {
+      FocusManager.instance.primaryFocus?.unfocus();
+      String name = _nameController.text;
 
-    User newUser = User(
-      usuTxNome: name,
-      usuTxLogin: username,
-      usuTxSenha: password,
-      usuDtCadastro: dateTime
-    );
-
+      Tournament newTournament = Tournament(
+          torTxNome: name);
+      await Services().createTournament(newTournament);
+    } catch (error){
+      print("Tournament register error: $error");
+    }
   }
 
   @override
@@ -101,7 +99,9 @@ class _TournamentRegisterState extends State<TournamentRegister> {
                 //   ),
                 // ),
                 SizedBox(height: 10),
-                ElevatedButton(onPressed:() {
+                ElevatedButton(onPressed:() async {
+                  await register();
+                  Navigator.pop(context);
                 }, child: Text("Cadastrar",style: TextStyle(color: Colors.black),))
               ],),
             ),
