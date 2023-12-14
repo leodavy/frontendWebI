@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_web1/service/Services.dart';
 import 'package:frontend_web1/view/Home.dart';
 import 'package:frontend_web1/view/Register.dart';
 
@@ -64,14 +65,39 @@ class _LoginState extends State<Login> {
               ),
             ),
             SizedBox(height: 10),
-            ElevatedButton(onPressed:() {
-              Navigator.push(
+            ElevatedButton(onPressed:() async {
+              bool isAuthenticated = await Services().authenticateUser(
+                  _usernameController.text,
+                  _passwordController.text);
+
+              if (isAuthenticated) {
+                Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context)=> Home()));
-            }, child: Text("Entrar",
+                    builder: (context) => Home(),
+                  ),
+                );
+              } else {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context){
+                      return AlertDialog(
+                        title: Text("Falha ao autenticar"),
+                        content: Text("Verifique seu usuário ou senha"),
+                        actions: [
+                          TextButton(onPressed: (){
+                            Navigator.of(context).pop();
+                          },
+                              child: Text("Ok"))
+                        ],
+                      );
+                    }
+                );
+              }
+
+              }, child: Text("Entrar",
               style: TextStyle(
-                  color: Colors.black),)),
+                  color: Colors.black))),
             TextButton(onPressed:() {
               Navigator.push(
                   context,

@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Services{
-  final String userBaseUrl="http://192.168.0.105:8080";
+  // final String userBaseUrl="http://192.168.0.105:8080"; //notebook
+  final String userBaseUrl="http://192.168.0.107:8080"; //desktop
 
   Future<User> createUser(User newUser) async {
     try {
@@ -16,13 +17,40 @@ class Services{
           if (kDebugMode) {
             print("User successfully registered!");
           }
-
         return newUser;
       } else {
         throw Exception("Failed to register user");
       }
     } catch (error) {
       throw Exception("Failed to register user");
+    }
+  }
+  Future<bool> authenticateUser(String username, String password) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$userBaseUrl/usuarios/autenticar'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'usuTxLogin': username,
+          'usuTxSenha': password,
+        }),
+      );
+      if (response.statusCode == 200) {
+        if (kDebugMode) {
+          print("User successfully authenticated!");
+        }
+        return true;
+      } else {
+        if (kDebugMode) {
+          print("Authentication failed: ${response.body}");
+        }
+        return false;
+      }
+    } catch (error) {
+      if (kDebugMode) {
+        print("Authentication error: $error");
+      }
+      return false;
     }
   }
 }

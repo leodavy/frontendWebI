@@ -17,7 +17,7 @@ class _RegisterState extends State<Register> {
   final TextEditingController _passwordController = TextEditingController();
   User? user;
 
-  void register() async {
+   register() async {
     FocusManager.instance.primaryFocus?.unfocus();
     try{
       DateTime now = DateTime.now();
@@ -30,7 +30,6 @@ class _RegisterState extends State<Register> {
         usuDtCadastro: user?.usuDtCadastro = DateFormat("yyyy-MM-dd").parse(formattedDate));
       print("Novo usuário: $newUser");
         await Services().createUser(newUser);
-
 
     } catch (error) {
       print("User register error: $error");
@@ -110,8 +109,9 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
                 SizedBox(height: 10),
-                ElevatedButton(onPressed:() {
-                  register();
+                ElevatedButton(onPressed:() async{
+                  await register();
+                  Navigator.pop(context);
                 }, child: Text("Cadastrar",style: TextStyle(color: Colors.black),))
               ],),
             ),
