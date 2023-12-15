@@ -72,4 +72,20 @@ class Services{
       throw Exception("Failed to register tournament");
     }
   }
+
+  Future<List<Tournament>> getAllTournaments() async{
+    try{
+      final response = await http.get(
+        Uri.parse('$userBaseUrl/torneios/listarTodosTorneios'));
+      if(response.statusCode == 200){
+        List<dynamic> data = json.decode(response.body);
+        List<Tournament> tournaments = data.map((json) => Tournament.fromJson(json)).toList();
+        return tournaments;
+      } else {
+        throw Exception("Error when try to list tournaments - backend");
+      }
+    }catch (error){
+      throw Exception("Error when try to list tournaments $error");
+    }
+  }
 }

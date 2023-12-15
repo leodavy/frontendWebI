@@ -112,11 +112,12 @@ class _RegisterState extends State<Register> {
                 ElevatedButton(onPressed:() async{
                   await register();
                   Navigator.pop(context);
-                }, child: Text("Cadastrar",style: TextStyle(color: Colors.black),))
+                  }, child: Text("Cadastrar",style: TextStyle(color: Colors.black),))
               ],),
             ),
           ],
         ),
-      ) );
+      )
+    );
   }
 }

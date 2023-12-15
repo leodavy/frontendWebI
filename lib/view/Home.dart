@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_web1/view/TournamentRegister.dart';
-import 'package:frontend_web1/view/FindUser.dart';
+import 'package:frontend_web1/view/FindTournament.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -63,13 +63,13 @@ class _HomeState extends State<Home> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context)=> FindUser()));
+                                        builder: (context)=> FindTournament()));
                               },
                               icon: Icon(Icons.search, size: 90),
                             ),
                             Text("Consultar Torneio",
                               style: TextStyle(color: Colors.white,
-                                  fontSize: 20),)
+                                  fontSize: 20))
                           ],
                         ),
                       ),
@@ -98,7 +98,6 @@ class _HomeState extends State<Home> {
                     ),
                   )
                 ]
-
             )
         )
     );
