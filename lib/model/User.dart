@@ -12,7 +12,7 @@
     usuTxNome = json['usuTxNome'];
     usuTxLogin = json['usuTxLogin'];
     usuTxSenha = json['usuTxSenha'];
-    usuDtCadastro = json['usuDtCadastro'];
+    usuDtCadastro = json['usuDtCadastro'] != null ? DateTime.parse(json['usuDtCadastro']) : null;
     }
 
     Map<String, dynamic> toJson() {
@@ -21,7 +21,7 @@
     data['usuTxNome'] = this.usuTxNome;
     data['usuTxLogin'] = this.usuTxLogin;
     data['usuTxSenha'] = this.usuTxSenha;
-    data['usuDtCadastro'] = this.usuDtCadastro;
+    data['usuDtCadastro'] = this.usuDtCadastro?.toIso8601String();
     return data;
     }
     }

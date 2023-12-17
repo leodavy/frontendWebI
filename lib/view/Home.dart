@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_web1/view/FindUser.dart';
 import 'package:frontend_web1/view/TournamentRegister.dart';
 import 'package:frontend_web1/view/FindTournament.dart';
 
@@ -87,7 +88,10 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           onPressed: () {
-
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context)=> FindUser()));
                           },
                           icon: Icon(Icons.search, size: 90),
                         ),

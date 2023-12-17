@@ -4,6 +4,8 @@ import 'package:frontend_web1/model/User.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../model/TournamentCategory.dart';
+
 class Services{
   // final String userBaseUrl="http://192.168.0.105:8080"; //notebook
   final String userBaseUrl="http://192.168.0.107:8080"; //desktop
@@ -70,6 +72,64 @@ class Services{
       }
     } catch (error) {
       throw Exception("Failed to register tournament");
+    }
+  }
+  Future<TournamentCategory> createCategory(int torNrId, TournamentCategory newCategory) async {
+    try {
+      final response = await http.post(
+          Uri.parse('$userBaseUrl/torneios/$torNrId/categorias/cadastrar'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode(newCategory.toJson()));
+      if (response.statusCode == 200) {
+        if (kDebugMode) {
+          print("Category successfully registered!");
+        }
+        return newCategory;
+      } else {
+        throw Exception("Failed to register category");
+      }
+    } catch (error) {
+      throw Exception("Failed to register category $error");
+    }
+  }
+  Future<User?> getUserByName(String usuTxNome) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$userBaseUrl/usuarios/buscarPorNome/$usuTxNome'),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      print("Response status code: ${response.statusCode}");
+      print("Response body: ${response.body}");
+
+      if (response.statusCode == 200) {
+        Map<String, dynamic> userData = json.decode(response.body);
+        print("Decoded user data: $userData");
+        return User.fromJson(userData);
+      } else if (response.statusCode == 404) {
+        print("User not found");
+        return null;
+      } else {
+        throw Exception("Failed to get user by name. Status code: ${response.statusCode}");
+      }
+    } catch (error) {
+      print("Error getting user by name: $error");
+      throw Exception("Failed to get user by name");
+    }
+  }
+  Future<List<User>> getAllUsers() async{
+    try{
+      final response = await http.get(
+          Uri.parse('$userBaseUrl/usuarios/listarTodosUsuarios'));
+      if(response.statusCode == 200){
+        List<dynamic> data = json.decode(response.body);
+        List<User> users = data.map((json) => User.fromJson(json)).toList();
+        return users;
+      } else {
+        throw Exception("Error when try to list all users - backend");
+      }
+    }catch (error){
+      throw Exception("Error when try to list all users $error");
     }
   }
 
