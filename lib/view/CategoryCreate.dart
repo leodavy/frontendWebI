@@ -21,8 +21,8 @@ class _CategoryCreateState extends State<CategoryCreate> {
       int? torNrId = widget.tournament.torNrId;
       if(torNrId != null){
         TournamentCategory tournamentCategory = TournamentCategory(
-            torTxNome: name,
-            torNrId: widget.tournament.torNrId
+            catTxNome: name,
+
         );
         await Services().createCategory(torNrId,tournamentCategory);
       }

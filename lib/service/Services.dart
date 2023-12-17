@@ -76,10 +76,13 @@ class Services{
   }
   Future<TournamentCategory> createCategory(int torNrId, TournamentCategory newCategory) async {
     try {
+      print("Request Body: ${jsonEncode(newCategory.toJson())}");
       final response = await http.post(
-          Uri.parse('$userBaseUrl/torneios/$torNrId/categorias/cadastrar'),
-          headers: {'Content-Type': 'application/json'},
-          body: jsonEncode(newCategory.toJson()));
+        Uri.parse('$userBaseUrl/torneios/$torNrId/categorias/cadastrar'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(newCategory.toJson()),
+      );
+
       if (response.statusCode == 200) {
         if (kDebugMode) {
           print("Category successfully registered!");
@@ -148,4 +151,20 @@ class Services{
       throw Exception("Error when try to list tournaments $error");
     }
   }
+  Future<List<TournamentCategory>> getAllCategories(int torNrId) async{
+    try{
+      final response = await http.get(
+          Uri.parse('$userBaseUrl/torneios/$torNrId/listarTodasCategorias'));
+      if(response.statusCode == 200){
+        List<dynamic> data = json.decode(response.body);
+        List<TournamentCategory> categories = data.map((json) => TournamentCategory.fromJson(json)).toList();
+        return categories;
+      } else {
+        throw Exception("Error when try to list categories - backend");
+      }
+    }catch (error){
+      throw Exception("Error when try to list categories $error");
+    }
+  }
+
 }

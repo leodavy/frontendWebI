@@ -1,18 +1,20 @@
 class TournamentCategory {
-  int? torNrId;
-  String? torTxNome;
+  int? catNrId;
+  String? catTxNome;
 
-  TournamentCategory({this.torNrId, this.torTxNome});
+  TournamentCategory({this.catNrId, this.catTxNome});
 
-  TournamentCategory.fromJson(Map<String, dynamic> json) {
-    torNrId = json['torNrId'];
-    torTxNome = json['torTxNome'];
+  factory TournamentCategory.fromJson(Map<String, dynamic> json) {
+    return TournamentCategory(
+      catNrId: json['catNrId'],
+      catTxNome: json['catTxNome'],
+    );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['torNrId'] = this.torNrId;
-    data['torTxNome'] = this.torTxNome;
+    data['catNrId'] = this.catNrId;
+    data['catTxNome'] = this.catTxNome;
     return data;
   }
 }
